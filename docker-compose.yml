@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - SQLALCHEMY_DATABASE_URI=postgresql://postgres:mirka2003@db:5432/blog_platform
+      - FLASK_ENV=development
+      - FLASK_DEBUG=1
+    volumes:
+      - ./templates:/app/templates
+      - ./static:/app/static
+    depends_on:
+      - db
+    networks:
+      - blog-network
+
+  db:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=mirka2003
+      - POSTGRES_DB=blog_platform
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - blog-network
+
+volumes:
+  postgres_data:
+
+networks:
+  blog-network:
+    driver: bridge
