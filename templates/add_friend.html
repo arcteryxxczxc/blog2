@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Add a friend</h2>
+<form method="POST">
+    <label>Enter name:</label>
+    <input type="text" name="search_name" required>
+    <button type="submit">Find</button>
+</form>
+
+{% if potential_friends %}
+    <h3>Found users</h3>
+    <ul>
+    {% for person in potential_friends %}
+        <li>
+            {{ person.name }} ({{ person.email }})
+            <a href="{{ url_for('add_friend_by_id', friend_id=person.id) }}">Add as friend</a>
+        </li>
+    {% endfor %}
+    </ul>
+{% endif %}
+<a href="{{ url_for('profile') }}">Back</a>
+{% endblock %}

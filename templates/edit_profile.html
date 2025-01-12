@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Edit profile</h2>
+<form method="POST" enctype="multipart/form-data">
+    <div>
+        <label>Name:</label><br>
+        <input type="text" name="name" value="{{ user.name }}" required>
+    </div>
+    <div>
+        <label>Profile photo:</label><br>
+        <input type="file" name="profile_picture">
+    </div>
+    <button type="submit">Save changes</button>
+</form>
+<a href="{{ url_for('profile') }}">Back</a>
+{% endblock %}

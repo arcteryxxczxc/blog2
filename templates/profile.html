@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Welcome, {{ user.name }}</h2>
+<img src="{{ url_for('static', filename='images/' + user.profile_picture) }}" alt="Фото профиля" width="150">
+<p>Email: {{ user.email }}</p>
+
+<h3>Your posts</h3>
+{% if posts %}
+    <ul>
+    {% for post in posts %}
+        <li>
+            <h4>{{ post.title }}</h4>
+            <p>{{ post.content }}</p>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>You don't have any posts yet.</p>
+{% endif %}
+
+<a href="{{ url_for('add_post') }}">Add a post</a>
+
+<h3>Your friends</h3>
+{% if friends %}
+    <ul>
+    {% for friend in friends %}
+        <li>{{ friend.name }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>You don't have any friends yet.</p>
+{% endif %}
+
+<a href="{{ url_for('add_friend') }}">Add a friend</a>
+{% endblock %}

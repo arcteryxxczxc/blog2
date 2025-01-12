@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Home page</h2>
+
+<h3>Friends' posts</h3>
+{% if friends_posts %}
+    <ul>
+    {% for post in friends_posts %}
+        <li>
+            <h4>{{ post.title }} <small>от {{ post.user.name }}</small></h4>
+            <p>{{ post.content }}</p>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>You don't have any posts from friends yet.</p>
+{% endif %}
+
+<h3>Popular posts</h3>
+{% if popular_posts %}
+    <ul>
+    {% for post in popular_posts %}
+        <li>
+            <h4>{{ post.title }} <small>от {{ post.user.name }}</small></h4>
+            <p>{{ post.content }}</p>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>There are no popular posts.</p>
+{% endif %}
+{% endblock %}

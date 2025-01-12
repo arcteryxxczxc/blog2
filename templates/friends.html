@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Friends management</h2>
+
+<h3>Your friends</h3>
+{% if user.friends %}
+    <ul>
+    {% for friend in user.friends %}
+        <li>
+            {{ friend.name }} ({{ friend.email }})
+            <a href="{{ url_for('remove_friend', friend_id=friend.id) }}">Удалить</a>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>You don't have any friends yet.</p>
+{% endif %}
+
+<h3>All users</h3>
+<ul>
+{% for person in all_users %}
+    <li>
+        {{ person.name }} ({{ person.email }})
+        {% if person in user.friends %}
+            <span>Your friend</span>
+        {% else %}
+            <a href="{{ url_for('add_friend', friend_id=person.id) }}">Add</a>
+        {% endif %}
+    </li>
+{% endfor %}
+</ul>
+{% endblock %}
